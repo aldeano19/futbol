@@ -1,0 +1,21 @@
+6v6_futsal:
+  min_players: 5
+  max_players: 6
+  half_time: 20
+
+6v6_casual:
+  min_players: 5
+  max_players: 8
+  half_time: 7
+
+11v11_field:
+  min_players: 9
+  max_players: 11
+  half_time: 30
+
+11v11_casual:
+  min_players: 7
+  max_players: 11
+  half_time: 15
+
+
