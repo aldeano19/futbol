@@ -6,9 +6,26 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @team.user %>
+  <strong>Creator email:</strong>
+  <%= @team.user[:email] %>
 </p>
+
+<%= form_tag add_player_path, method: :post do %>
+  <%= label_tag(:email, "New Player Email:") %>
+  <%= text_field_tag(:email) %>
+
+  <%= hidden_field_tag "id", @team.id %>
+
+  <%= submit_tag("Add") %>
+<% end %>
+
+<ul>
+  <% @players.each do |player| %>
+    <li>
+      <%= player.email %>
+    </li>
+  <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

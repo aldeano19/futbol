@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player]
   before_action :authenticate_user!
 
   # GET /teams
@@ -8,9 +8,24 @@ class TeamsController < ApplicationController
     @teams = Team.where(created_by_id: current_user.id)
   end
 
+  def add_player
+    begin
+      user_to_add = User.find_by_email(request[:email])
+      relationship = PlayerTeamR.new(team_id: @team.id, user_id: user_to_add.id)
+      relationship.save!
+
+      flash[:success] = "Player was successfully created."
+      redirect_to @team
+    rescue ActiveRecord::RecordNotUnique => e
+      flash[:error] = "Player: #{request[:email]} is already on the Team."
+      redirect_to @team
+    end
+  end
+
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @players = User.find(@team.player_team_rs.pluck(:user_id))
   end
 
   # GET /teams/new
@@ -69,6 +84,8 @@ class TeamsController < ApplicationController
     def set_team
       @team = Team.find(params[:id])
     end
+
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
