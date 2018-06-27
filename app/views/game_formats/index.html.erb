@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Game Formats</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Min players</th>
+      <th>Max players</th>
+      <th>Half time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_formats.each do |game_format| %>
+      <tr>
+        <td><%= game_format.name %></td>
+        <td><%= game_format.min_players %></td>
+        <td><%= game_format.max_players %></td>
+        <td><%= game_format.half_time %></td>
+        <td><%= link_to 'Show', game_format %></td>
+        <td><%= link_to 'Edit', edit_game_format_path(game_format) %></td>
+        <td><%= link_to 'Destroy', game_format, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game Format', new_game_format_path %>

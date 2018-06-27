@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @game_format.name %>
+</p>
+
+<p>
+  <strong>Min players:</strong>
+  <%= @game_format.min_players %>
+</p>
+
+<p>
+  <strong>Max players:</strong>
+  <%= @game_format.max_players %>
+</p>
+
+<p>
+  <strong>Half time:</strong>
+  <%= @game_format.half_time %>
+</p>
+
+<%= link_to 'Edit', edit_game_format_path(@game_format) %> |
+<%= link_to 'Back', game_formats_path %>
