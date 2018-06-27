@@ -1,10 +1,11 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = Team.where(created_by_id: current_user.id)
   end
 
   # GET /teams/1
@@ -25,6 +26,8 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
+
+    @team.created_by_id = current_user.id
 
     respond_to do |format|
       if @team.save
@@ -69,6 +72,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :user_id)
+      params.require(:team).permit(:name)
     end
 end
