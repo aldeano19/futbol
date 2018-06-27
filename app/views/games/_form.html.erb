@@ -1,0 +1,42 @@
+<%= form_with(model: game, local: true) do |form| %>
+  <% if game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+      <% game.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :when %>
+    <%= form.datetime_select :when %>
+  </div>
+
+  <div class="field">
+    <%= form.label :where %>
+    <%= form.text_field :where %>
+  </div>
+
+  <div class="field">
+    <%= form.label "game[teamA_id]", "Team A" %>
+    <%= form.collection_select(:game, Team.all, :id, :name, {selected: Team.first.id, prompt: true}, name: "game[teamA_id]") %>
+  </div>
+
+  <div class="field">
+    <%= form.label "game[teamB_id]", "Team B"%>
+    <%= form.collection_select(:game, Team.all, :id, :name, {selected: Team.last.id, prompt: true}, name: "game[teamB_id]") %>
+  </div>
+
+  <div class="field">
+    <%= form.label :format %>
+    <%= form.text_field :format %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

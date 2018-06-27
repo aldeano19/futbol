@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>When:</strong>
+  <%= @game.when.strftime("%A, %d %b %Y %l:%M %p") %>
+</p>
+
+<p>
+  <strong>Where:</strong>
+  <%= @game.where %>
+</p>
+
+<p>
+  <strong>Teama:</strong>
+  <%= @game.teamA[:name] %>
+</p>
+
+<p>
+  <strong>Teamb:</strong>
+  <%= @game.teamB[:name] %>
+</p>
+
+<p>
+  <strong>Format:</strong>
+  <%= @game.format %>
+</p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

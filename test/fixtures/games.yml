@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  when: 2018-06-27 01:32:25
+  where: MyString
+  teamA: one
+  teamB: one
+  format: MyString
+
+two:
+  when: 2018-06-27 01:32:25
+  where: MyString
+  teamA: two
+  teamB: two
+  format: MyString
