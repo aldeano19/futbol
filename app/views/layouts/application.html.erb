@@ -11,14 +11,33 @@
 
   <body class="container">
 
-    <div class="row">
-      <%= link_to "Sign In", new_user_session_path, class: "btn btn-secondary btn-nav" %>
-      <%= link_to "Log Out", destroy_user_session_path, class: "btn btn-secondary btn-nav", method: :delete %>
-    </div>
+    <nav class="navbar">
 
+      <ul class="list-inline">
+        <li class="list-inline-item hover-background-change">
+          <%= link_to "Home", root_path, class: "nav-link border rounded btn-primary" %>
+        </li>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+        <% if user_signed_in? %>
+          <li class="list-inline-item hover-background-change">
+            <%= link_to "Log Out", destroy_user_session_path, class: "nav-link border rounded btn-danger", method: :delete %>
+          </li>
+
+          <li class="list-inline-item hover-background-change">
+            <%= link_to "Games", games_path, class: "nav-link border rounded btn-secondary"%>
+          </li>
+
+          <li class="list-inline-item hover-background-change">
+            <%= link_to "Teams", teams_path, class: "nav-link border rounded btn-secondary" %>
+          </li>
+        <% else %>
+          <li class="list-inline-item hover-background-change">
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link border rounded btn-success" %>
+          </li>
+        <% end %>
+      </ul>
+
+    </nav>
 
     <% flash.each do |key, value| %>
       <%= content_tag :div, value, class: "flash #{key}" %>

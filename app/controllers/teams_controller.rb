@@ -5,7 +5,8 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.where(created_by_id: current_user.id)
+    @teams = Team.where(created_by_id: current_user.id) # Teams this user owns
+    @teams_other = Team.find(current_user.player_team_rs.pluck(:team_id)) # Other Teams this user associates to
   end
 
   def add_player
