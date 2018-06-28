@@ -1,0 +1,45 @@
+<div class="border border-success info-preview">
+  <h1 class="teams-preview-title text-center">Your Teams</h1>
+  <div class="table-responsive preview-table">
+    <table class="table table-sm table-hover text-center header-fixed">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Joined</th>
+        <th>Total Players</th>
+        <th>Wins</th>
+        <th>Loses</th>
+
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @teams.each do |team| %>
+        <tr>
+          <td>
+            <%= team.name %>
+          </td>
+
+          <td>
+            <%= dateFormatTwo(DateTime.now) %>
+          </td>
+
+          <td>
+            34
+          </td>
+
+          <td>
+            23
+          </td>
+
+          <td>
+            15
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

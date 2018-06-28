@@ -1,6 +1,36 @@
 @import "bootstrap";
 
+.games-preview-title {
+  color: lightblue;
+}
+
+.teams-preview-title {
+  color: lightgreen;
+}
+
+.stats-preview-title {
+  color: lightsalmon;
+}
+
+.preview-table {
+  height: 30vh;
+}
+
+.preview-table-1 {
+  height: 15vh;
+}
 
 .hover-background-change:hover {
   background-color: aquamarine;
 }
+
+.info-preview {
+  border-radius: 20px;
+
+  div {
+    padding: 10px;
+  }
+
+  margin: 5vh;
+}
+
