@@ -1,7 +1,10 @@
 
+  <%= render "pages/upcomming_games" %>
 
-<%= render "pages/upcomming_games" %>
+<% if user_signed_in? %>
 
-<%= render "pages/your_teams" %>
+  <%= render "pages/your_teams" %>
 
-<%= render "pages/your_stats" %>
+  <%= render "pages/your_stats" %>
+
+<% end %>

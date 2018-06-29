@@ -46,7 +46,12 @@ class TeamsController < ApplicationController
     @team.created_by_id = current_user.id
 
     respond_to do |format|
-      if @team.save
+      if @team.save!
+
+        # Add creator to PlayerTeamR table
+        relationship = PlayerTeamR.new(team_id: @team.id, user_id: @team.created_by_id)
+        relationship.save!
+
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
