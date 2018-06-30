@@ -1,4 +1,4 @@
 class Game < ApplicationRecord
-  belongs_to :teamA, class_name: "Team"
-  belongs_to :teamB, class_name: "Team"
+  belongs_to :team_a, class_name: "Team"
+  belongs_to :team_b, class_name: "Team"
 end

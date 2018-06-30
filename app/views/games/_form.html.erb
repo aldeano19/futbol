@@ -22,13 +22,13 @@
   </div>
 
   <div class="field">
-    <%= form.label "game[teamA_id]", "Team A" %>
-    <%= form.collection_select(:game, Team.all, :id, :name, {selected: Team.first.id, prompt: true}, name: "game[teamA_id]") %>
+    <%= form.label "game[team_a_id]", "Team A" %>
+    <%= form.collection_select(:game, Team.all, :id, :name, {selected: Team.first.id, prompt: true}, name: "game[team_a_id]") %>
   </div>
 
   <div class="field">
-    <%= form.label "game[teamB_id]", "Team B"%>
-    <%= form.collection_select(:game, Team.all, :id, :name, {selected: Team.last.id, prompt: true}, name: "game[teamB_id]") %>
+    <%= form.label "game[team_b_id]", "Team B"%>
+    <%= form.collection_select(:game, Team.all, :id, :name, {selected: Team.last.id, prompt: true}, name: "game[team_b_id]") %>
   </div>
 
   <div class="field">

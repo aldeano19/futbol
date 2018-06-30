@@ -15,8 +15,8 @@ class GamesTest < ApplicationSystemTestCase
     click_on "New Game"
 
     fill_in "Format", with: @game.format
-    fill_in "Teama", with: @game.teamA_id
-    fill_in "Teamb", with: @game.teamB_id
+    fill_in "Teama", with: @game.team_a_id
+    fill_in "Teamb", with: @game.team_b_id
     fill_in "When", with: @game.when
     fill_in "Where", with: @game.where
     click_on "Create Game"
@@ -30,8 +30,8 @@ class GamesTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Format", with: @game.format
-    fill_in "Teama", with: @game.teamA_id
-    fill_in "Teamb", with: @game.teamB_id
+    fill_in "Teama", with: @game.team_a_id
+    fill_in "Teamb", with: @game.team_b_id
     fill_in "When", with: @game.when
     fill_in "Where", with: @game.where
     click_on "Update Game"

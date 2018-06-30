@@ -19,8 +19,8 @@
       <tr>
         <td><%= game.when.strftime("%m/%d/%Y") %></td>
         <td><%= game.where %></td>
-        <td><%= game.teamA[:name] %></td>
-        <td><%= game.teamB[:name] %></td>
+        <td><%= game.team_a[:name] %></td>
+        <td><%= game.team_b[:name] %></td>
         <td><%= game.format %></td>
         <td><%= link_to 'Show', game %></td>
         <td><%= link_to 'Edit', edit_game_path(game) %></td>

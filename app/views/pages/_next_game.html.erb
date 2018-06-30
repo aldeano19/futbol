@@ -6,22 +6,22 @@
 
   <table class="table table-striped table-bordered table-hover table-sm">
     <thead>
-      <th bgcolor="#f08080"><%= @next_game.teamA.name %></th>
-      <th bgcolor="#add8e6"> <%= @next_game.teamB.name %></th>
+      <th bgcolor="#f08080"><%= @next_game.team_a.name %></th>
+      <th bgcolor="#add8e6"> <%= @next_game.team_b.name %></th>
     </thead>
 
     <tbody>
-      <%# @next_game.teamA.player_team_rs.pluck(:user_id).each do |user_id| %>
-      <% player_teamA_relationship = @next_game.teamA.player_team_rs %>
-      <% player_teamB_relationship = @next_game.teamB.player_team_rs %>
-      <% totalPlayersA = player_teamA_relationship.length %>
-      <% totalPlayersB = player_teamB_relationship.length %>
+      <%# @next_game.team_a.player_team_rs.pluck(:user_id).each do |user_id| %>
+      <% player_team_a_relationship = @next_game.team_a.player_team_rs %>
+      <% player_team_b_relationship = @next_game.team_b.player_team_rs %>
+      <% totalPlayersA = player_team_a_relationship.length %>
+      <% totalPlayersB = player_team_b_relationship.length %>
 
       <% size = totalPlayersA > totalPlayersB ? totalPlayersA : totalPlayersB %>
       <% (0..size).each do |index| %>
         <tr>
-          <td><%= User.find(player_teamA_relationship[index].user_id).name if player_teamA_relationship[index] %></td>
-          <td><%= User.find(player_teamB_relationship[index].user_id).name if player_teamB_relationship[index] %></td>
+          <td><%= User.find(player_team_a_relationship[index].user_id).name if player_team_a_relationship[index] %></td>
+          <td><%= User.find(player_team_b_relationship[index].user_id).name if player_team_b_relationship[index] %></td>
         </tr>
       <% end %>
     </tbody>
