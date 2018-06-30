@@ -10,7 +10,7 @@ class PagesController < ApplicationController
     else
       team_ids = Team.all.pluck(:id)
     end
-    @games = Game.where("teamA_id IN (?) OR teamB_id IN (?)", team_ids, team_ids).to_a
+    @games = Game.where("games.teamA_id IN (?) OR games.teamB_id IN (?)", team_ids, team_ids).to_a
   end
 
 end
