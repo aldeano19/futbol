@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def index;
     if user_signed_in?
-      @next_game = Game.where("'when' > ?", Date.today).order("'when'").first
+      @next_game = Game.where("scheduled_date > ?", Date.today).order("scheduled_date").first
 
       team_ids = current_user.player_team_rs.pluck(:team_id)
       @teams = Team.where(id: team_ids)
