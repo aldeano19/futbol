@@ -17,7 +17,7 @@ class GamesTest < ApplicationSystemTestCase
     fill_in "Format", with: @game.format
     fill_in "Teama", with: @game.team_a_id
     fill_in "Teamb", with: @game.team_b_id
-    fill_in "When", with: @game.when
+    fill_in "When", with: @game.scheduled_date
     fill_in "Where", with: @game.where
     click_on "Create Game"
 
@@ -32,7 +32,7 @@ class GamesTest < ApplicationSystemTestCase
     fill_in "Format", with: @game.format
     fill_in "Teama", with: @game.team_a_id
     fill_in "Teamb", with: @game.team_b_id
-    fill_in "When", with: @game.when
+    fill_in "When", with: @game.scheduled_date
     fill_in "Where", with: @game.where
     click_on "Update Game"
 
