@@ -10,26 +10,32 @@
   <%= @team.user[:name] %>
 </p>
 
-<%= form_tag add_player_path, method: :post do %>
-  <%= label_tag(:email, "New Player Email:") %>
-  <%= text_field_tag(:email) %>
+<div class="border" style="padding: 5vh;">
+  <%= form_tag add_player_path, method: :post do %>
+    <%= label_tag(:email, "New Player Email:") %>
+    <%= text_field_tag(:email) %>
 
-  <%= hidden_field_tag "id", @team.id %>
+    <%= hidden_field_tag "id", @team.id %>
 
-  <%= submit_tag("Add") %>
-<% end if current_user.owns? @team %>
+    <%= submit_tag("Add") %>
+  <% end if current_user.owns? @team %>
+</div>
 
-<ul>
+<ul style="margin-top: 2vh;">
   <% @players.each do |player| %>
     <li>
-      <%= player.name %>
-<!--      Current User cannot delete itself if it own the team.
-          Current User may delete itself if it does not own the team.
-          Current User can delete any other User.  -->
-      <% if (current_user.owns? @team and current_user.id != player.id) or
-            (!(current_user.owns? @team) and current_user.id == player.id) %>
-        <%= link_to 'Remove', remove_player_path(id: @team.id, user_id: player.id, user_name: player.name), method: :delete, data: {confirm: 'Are you sure?'} %>
-      <% end %>
+      <div class="row" >
+        <p class="col-3 border-bottom border-right" ><%= player.name %></p>
+  <!--      Current User cannot delete itself if it own the team.
+            Current User may delete itself if it does not own the team.
+            Current User can delete any other User.  -->
+        <% if (current_user.owns? @team and current_user.id != player.id) or
+              (!(current_user.owns? @team) and current_user.id == player.id) %>
+
+          <%= link_to "Remove", remove_player_path(id: @team.id, user_id: player.id, user_name: player.name), method: :delete, data: {confirm: 'Are you sure?'}, class: "col"%>
+
+        <% end %>
+      </div>
     </li>
 
 

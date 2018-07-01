@@ -2,7 +2,8 @@
 
 
 <% if user_signed_in? %>
-  <%= render "pages/next_game" %>
+
+  <%= render "pages/next_game" if @next_game%>
 
   <%= render "pages/upcomming_games" %>
 

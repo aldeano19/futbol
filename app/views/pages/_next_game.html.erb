@@ -11,19 +11,19 @@
     </thead>
 
     <tbody>
-      <%# @next_game.team_a.player_team_rs.pluck(:user_id).each do |user_id| %>
-      <% player_team_a_relationship = @next_game.team_a.player_team_rs %>
-      <% player_team_b_relationship = @next_game.team_b.player_team_rs %>
-      <% totalPlayersA = player_team_a_relationship.length %>
-      <% totalPlayersB = player_team_b_relationship.length %>
 
-      <% size = totalPlayersA > totalPlayersB ? totalPlayersA : totalPlayersB %>
+      <% team_a_players = @next_game.team_a.players%>
+      <% team_b_players = @next_game.team_b.players%>
+      <% size = [team_a_players.length, team_b_players.length].max %>
       <% (0..size).each do |index| %>
         <tr>
-          <td><%= User.find(player_team_a_relationship[index].user_id).name if player_team_a_relationship[index] %></td>
-          <td><%= User.find(player_team_b_relationship[index].user_id).name if player_team_b_relationship[index] %></td>
+          <td><%= team_a_players[index].name if team_a_players[index]%></td>
+          <td><%= team_b_players[index].name if team_b_players[index]%></td>
+
         </tr>
       <% end %>
+
+
     </tbody>
   </table>
 
