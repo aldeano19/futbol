@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Team:</strong>
   <%= @team.name %>
 </p>
 
 <p>
-  <strong>Creator email:</strong>
-  <%= @team.user[:email] %>
+  <strong>Creator:</strong>
+  <%= @team.user[:name] %>
 </p>
 
 <%= form_tag add_player_path, method: :post do %>
@@ -17,13 +17,22 @@
   <%= hidden_field_tag "id", @team.id %>
 
   <%= submit_tag("Add") %>
-<% end %>
+<% end if current_user.owns? @team %>
 
 <ul>
   <% @players.each do |player| %>
     <li>
-      <%= player.email %>
+      <%= player.name %>
+<!--      Current User cannot delete itself if it own the team.
+          Current User may delete itself if it does not own the team.
+          Current User can delete any other User.  -->
+      <% if (current_user.owns? @team and current_user.id != player.id) or
+            (!(current_user.owns? @team) and current_user.id == player.id) %>
+        <%= link_to 'Remove', remove_player_path(id: @team.id, user_id: player.id, user_name: player.name), method: :delete, data: {confirm: 'Are you sure?'} %>
+      <% end %>
     </li>
+
+
   <% end %>
 </ul>
 

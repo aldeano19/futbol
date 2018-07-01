@@ -1,10 +1,12 @@
 class GamesController < ApplicationController
+  include GamesHelper
+
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = get_all_games_for_user(current_user)
   end
 
   # GET /games/1

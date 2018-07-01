@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player, :remove_player]
   before_action :authenticate_user!
 
   # GET /teams
@@ -7,6 +7,17 @@ class TeamsController < ApplicationController
   def index
     @teams = Team.where(created_by_id: current_user.id) # Teams this user owns
     @teams_other = Team.find(current_user.player_team_rs.pluck(:team_id)) # Other Teams this user associates to
+  end
+
+  def remove_player
+    result = PlayerTeamR.where(user_id: params[:user_id], team_id: @team.id).destroy_all
+
+    if result
+      flash[:success] = "Player #{params[:user_name]} was successfully removed."
+    else
+      flash[:error] = "Player #{params[:user_name]} could not be removed."
+    end
+    redirect_to @team
   end
 
   def add_player

@@ -8,4 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
 
+  def owns?(team)
+    return !Team.find_by(created_by_id: id, id: team.id).nil?
+  end
 end

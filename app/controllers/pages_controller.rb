@@ -1,16 +1,15 @@
 class PagesController < ApplicationController
-  # before_action :authenticate_user!
+  include TeamsHelper
+  include GamesHelper
 
   def index;
     if user_signed_in?
-      @next_game = Game.where("scheduled_date > ?", Date.today).order("scheduled_date").first
-
-      team_ids = current_user.player_team_rs.pluck(:team_id)
-      @teams = Team.where(id: team_ids)
+      @next_game = get_next_game_for_user(current_user)
+      @teams = get_teams_for_user(current_user)
+      @games = get_all_games_for_user(current_user)
     else
-      team_ids = Team.all.pluck(:id)
+      @games = Game.all
     end
-    @games = Game.where("team_a_id IN (?) OR team_b_id IN (?)", team_ids, team_ids).to_a
   end
 
 end
