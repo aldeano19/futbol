@@ -32,8 +32,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :format %>
-    <%= form.text_field :format %>
+    <%= form.label "game[format_id]" %>
+    <%= form.collection_select(:game_format, GameFormat.all, :id, :name, {selected: GameFormat.first.id, prompt: true}, name: "game[format_id]") %>
   </div>
 
   <div class="actions">

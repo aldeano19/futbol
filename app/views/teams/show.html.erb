@@ -32,12 +32,12 @@
         <% if (current_user.owns? @team and current_user.id != player.id) or
               (!(current_user.owns? @team) and current_user.id == player.id) %>
 
-          <%= link_to "Remove", remove_player_path(id: @team.id, user_id: player.id, user_name: player.name), method: :delete, data: {confirm: 'Are you sure?'}, class: "col"%>
+          <%= link_to "Remove", remove_player_path(id: @team.id, user_id: player.id, user_name: player.name),
+                      method: :delete, data: {confirm: 'Are you sure?'}, class: "col"%>
 
         <% end %>
       </div>
     </li>
-
 
   <% end %>
 </ul>

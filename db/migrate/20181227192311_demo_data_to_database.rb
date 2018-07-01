@@ -34,10 +34,12 @@ class DemoDataToDatabase < ActiveRecord::Migration[5.2]
     PlayerTeamR.create user_id: u5.id, team_id: t2.id
     PlayerTeamR.create user_id: u6.id, team_id: t2.id
 
+
     # Create a Game
-    Game.create scheduled_date: Time.zone.parse('2044-01-01 19:00'), where: "Grey Dom", team_a_id: t1.id, team_b_id: t2.id, format: "wild"
-    Game.create scheduled_date: Time.zone.parse('2044-01-03 19:00'), where: "Grey Dom", team_a_id: t1.id, team_b_id: t2.id, format: "wild"
-    Game.create scheduled_date: Time.zone.parse('2044-01-05 19:00'), where: "Grey Dom", team_a_id: t1.id, team_b_id: t2.id, format: "wild"
+    formats = GameFormat.all
+    Game.create scheduled_date: Time.zone.parse('2044-01-01 19:00'), where: "Grey Dom", team_a_id: t1.id, team_b_id: t2.id, game_format_id: formats[0].id
+    Game.create scheduled_date: Time.zone.parse('2044-01-03 19:00'), where: "Grey Dom", team_a_id: t1.id, team_b_id: t2.id, game_format_id: formats[1].id
+    Game.create scheduled_date: Time.zone.parse('2044-01-05 19:00'), where: "Grey Dom", team_a_id: t1.id, team_b_id: t2.id, game_format_id: formats[2].id
 
   end
 end

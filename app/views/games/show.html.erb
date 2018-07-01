@@ -12,17 +12,17 @@
 
 <p>
   <strong>Teama:</strong>
-  <%= @game.team_a[:name] %>
+  <%= @game.team_a.name %>
 </p>
 
 <p>
   <strong>Teamb:</strong>
-  <%= @game.team_b[:name] %>
+  <%= @game.team_b.name %>
 </p>
 
 <p>
   <strong>Format:</strong>
-  <%= @game.format %>
+  <%= @game.game_format.name %>
 </p>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |

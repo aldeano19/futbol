@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_30_162015) do
+ActiveRecord::Schema.define(version: 2018_12_27_192311) do
 
   create_table "game_formats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(version: 2018_06_30_162015) do
     t.string "where"
     t.bigint "team_a_id"
     t.bigint "team_b_id"
-    t.string "format"
+    t.bigint "game_format_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_format_id"], name: "index_games_on_game_format_id"
     t.index ["team_a_id"], name: "index_games_on_team_a_id"
     t.index ["team_b_id"], name: "index_games_on_team_b_id"
   end
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_06_30_162015) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "games", "game_formats"
   add_foreign_key "games", "teams", column: "team_a_id"
   add_foreign_key "games", "teams", column: "team_b_id"
   add_foreign_key "player_team_rs", "teams"
