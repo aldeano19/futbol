@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :game_formats
   resources :games
   resources :teams
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   root "pages#index"
 

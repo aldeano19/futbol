@@ -1,14 +1,14 @@
 class DemoDataToDatabase < ActiveRecord::Migration[5.2]
   def change
     # Create test users
-    u1 = User.create name: "Joann Job", email: "t1@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
-    u2 = User.create name: "Donnette Deck", email: "t2@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
-    u3 = User.create name: "Arminda Attebery", email: "t3@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
-    u4 = User.create name: "Rayna Ruddell", email: "t4@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
-    u5 = User.create name: "Coletta Colbert", email: "t5@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
-    u6 =User.create name: "Teresa Torgrimson", email: "t6@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
-    u7 = User.create name: "Moises Mattews", email: "t7@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
-    u8 = User.create name: "Kathlene Koen", email: "t8@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
+    u1 = User.create phone: "1231231233", name: "Joann Job", email: "t1@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
+    u2 = User.create phone: "1231231233", name: "Donnette Deck", email: "t2@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
+    u3 = User.create phone: "1231231233", name: "Arminda Attebery", email: "t3@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
+    u4 = User.create phone: "1231231233", name: "Rayna Ruddell", email: "t4@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
+    u5 = User.create phone: "1231231233", name: "Coletta Colbert", email: "t5@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
+    u6 = User.create phone: "1231231233", name: "Teresa Torgrimson", email: "t6@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
+    u7 = User.create phone: "1231231233", name: "Moises Mattews", email: "t7@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
+    u8 = User.create phone: "1231231233", name: "Kathlene Koen", email: "t8@test.com", password: "q1w2e3", password_confirmation: "q1w2e3"
 
     # Create test teams
     t1 = Team.create name: "Aonyx Blue", created_by_id: u8.id
