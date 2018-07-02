@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   root "pages#index"
 
+  # get "search_players" => "teams#search_players"
   post "add_player" => "teams#add_player"
   delete "remove_player" => "teams#remove_player"
 end

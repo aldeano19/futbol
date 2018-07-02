@@ -1,10 +1,12 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player, :remove_player]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player, :remove_player, :search_players]
   before_action :authenticate_user!
 
   # GET /teams
   # GET /teams.json
   def index
+
+
     @teams = Team.where(created_by_id: current_user.id) # Teams this user owns
     @teams_other = Team.find(current_user.player_team_rs.pluck(:team_id)) # Other Teams this user associates to
   end
@@ -19,6 +21,12 @@ class TeamsController < ApplicationController
     end
     redirect_to @team
   end
+
+  # def search_players
+  #
+  #
+  #   redirect_to @team
+  # end
 
   def add_player
     begin
@@ -37,6 +45,12 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @q = User.ransack(params[:q])
+
+    @user_search = Array.new
+    @user_search = @q.result if params[:q] and params[:q][:name_or_phone_or_email_cont].length > 0
+
+
     @players = User.find(@team.player_team_rs.pluck(:user_id))
   end
 
