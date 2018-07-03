@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3018_12_27_192311) do
+ActiveRecord::Schema.define(version: 3018_12_27_192312) do
 
   create_table "game_formats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 3018_12_27_192311) do
     t.index ["user_id"], name: "index_player_team_rs_on_user_id"
   end
 
+  create_table "statistics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.integer "total", default: 1, null: false
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_statistics_on_game_id"
+    t.index ["user_id"], name: "index_statistics_on_user_id"
+  end
+
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "created_by_id"
@@ -78,5 +89,7 @@ ActiveRecord::Schema.define(version: 3018_12_27_192311) do
   add_foreign_key "games", "teams", column: "team_b_id"
   add_foreign_key "player_team_rs", "teams"
   add_foreign_key "player_team_rs", "users"
+  add_foreign_key "statistics", "games"
+  add_foreign_key "statistics", "users"
   add_foreign_key "teams", "users", column: "created_by_id"
 end
