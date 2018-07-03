@@ -1,24 +1,15 @@
-# README
+# DOCS
+##  Perform POST on \<tr> click:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##### the_view.html.erb
+    <tr onclick="foo(param1, '<%= form_authenticity_token %>')
+    
+##### application.js:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    var foo = function(param1, auth_token){
+        // This payload is accessible with params[:the_key_name] from the rails controller
+        var payload = {"param1" : param1, "authenticity_token" : auth_token};
+        $.post("/a_rails_route", payload, function (data, status) {
+            console.log("DONE!");
+        })
+    }

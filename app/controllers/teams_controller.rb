@@ -1,12 +1,10 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player, :remove_player, :search_players]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player, :remove_player]
   before_action :authenticate_user!
 
   # GET /teams
   # GET /teams.json
   def index
-
-
     @teams = Team.where(created_by_id: current_user.id) # Teams this user owns
     @teams_other = Team.find(current_user.player_team_rs.pluck(:team_id)) # Other Teams this user associates to
   end
@@ -29,15 +27,15 @@ class TeamsController < ApplicationController
   # end
 
   def add_player
+    puts 22
     begin
-      user_to_add = User.find_by_email(request[:email])
-      relationship = PlayerTeamR.new(team_id: @team.id, user_id: user_to_add.id)
+      relationship = PlayerTeamR.new(team_id: @team.id, user_id: params[:user_id])
       relationship.save!
 
-      flash[:success] = "Player was successfully created."
+      flash[:success] = "Player was successfully added."
       redirect_to @team
     rescue ActiveRecord::RecordNotUnique => e
-      flash[:error] = "Player: #{request[:email]} is already on the Team."
+      flash[:error] = "Player is already on the Team."
       redirect_to @team
     end
   end

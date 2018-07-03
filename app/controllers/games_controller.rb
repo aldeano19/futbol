@@ -6,7 +6,11 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = get_all_games_for_user(current_user)
+    if user_signed_in?
+      @games = get_all_games_for_user(current_user)
+    else
+      @games = Game.all
+    end
   end
 
   # GET /games/1

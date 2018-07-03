@@ -16,7 +16,7 @@
 
       <tbody>
       <% @teams.each do |team| %>
-        <tr>
+        <tr onclick="window.location = '/teams/<%= team.id %>'">
           <td>
             <%= team.name %>
           </td>

@@ -19,7 +19,7 @@
 
       <tbody>
       <% @games.each do |game| %>
-        <tr>
+        <tr onclick="window.location = '/games/<%= game.id %>'">
           <td>
             <%= dateFormatTwo(game.scheduled_date) %>
           </td>

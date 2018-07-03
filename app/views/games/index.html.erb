@@ -22,9 +22,14 @@
         <td><%= game.team_a.name %></td>
         <td><%= game.team_b.name %></td>
         <td><%= game.game_format.name %></td>
-        <td><%= link_to 'Show', game %></td>
-        <td><%= link_to 'Edit', edit_game_path(game) %></td>
-        <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <% if user_signed_in? and
+            (current_user.id == game.team_a.created_by_id or
+             current_user.id == game.team_b.created_by_id) %>
+          <td><%= link_to 'Show', game %></td>
+          <td><%= link_to 'Edit', edit_game_path(game) %></td>
+          <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +37,4 @@
 
 <br>
 
-<%= link_to 'New Game', new_game_path %>
+<%= link_to 'New Game', new_game_path if user_signed_in? %>

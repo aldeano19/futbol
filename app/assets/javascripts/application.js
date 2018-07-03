@@ -19,3 +19,32 @@
 //= require bootstrap
 
 //= require_tree .
+
+//
+// $('document').ready(function(){
+//
+//     $("tr").click(function() {
+//         window.location = $(this).data("link")
+//     })
+// });
+
+
+var foo = function () {
+    console.log("foo");
+}
+
+var bar = function (p1) {
+    console.log(p1);
+}
+
+
+var add_player = function(team_id, user_id, auth_token){
+    var payload = {"id": team_id, "user_id" : user_id, "authenticity_token" : auth_token};
+    $.post("/add_player", payload, function (data, status) {
+        console.log("DONE!");
+    }).fail(function() {
+        console.log("ERROR!");
+        alert("Error!")
+    });
+
+}
