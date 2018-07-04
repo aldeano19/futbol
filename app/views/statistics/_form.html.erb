@@ -13,17 +13,17 @@
 
   <div class="field">
     <%= form.label :user %>
-    <%= form.text_field :user %>
+    <%= form.collection_select(:user, User.all, :id, :name, {selected: User.first.id, prompt: true}, name: "statistic[user_id]") %>
   </div>
 
   <div class="field">
     <%= form.label :game %>
-    <%= form.text_field :game %>
+    <%= form.collection_select(:game, Game.all, :id, :scheduled_date, {selected: Game.first.id, prompt: true}, name: "statistic[game_id]") %>
   </div>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type %>
+    <%= form.label :stat_type %>
+    <%= form.select(:stat_type, Statistic.types.collect {|u| [u[0],u[0]]}) %>
   </div>
 
   <div class="field">

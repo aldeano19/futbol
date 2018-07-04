@@ -20,23 +20,49 @@
 
 //= require_tree .
 
-//
-// $('document').ready(function(){
-//
-//     $("tr").click(function() {
-//         window.location = $(this).data("link")
-//     })
-// });
+
+// $(document).ready(function () {
+//     $("#assists-editable").click(function () {
+//         console.log($(this).text());
+//     });
+// })
 
 
-var foo = function () {
-    console.log("foo");
-}
 
-var bar = function (p1) {
-    console.log(p1);
-}
+var editNumber = function () {
+};
+$(document).mouseup(function(e) {
+    var container = $("#stats-row");
+    var goalsTotal = document.getElementById("goals-editable").value;
+    var statsTotal = document.getElementById("assists-editable").value;
 
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+
+        playerId = container.attr("player-id");
+        gameId = container.attr("game-id");
+        auth_token = container.attr("auth-token");
+
+        var payload = {user_id: playerId, game_id: gameId, total: goalsTotal, stat_type: "goal",
+            "authenticity_token" : auth_token};
+
+        $.post("/statistics", payload, function (data, status) {
+            console.log("DONE!");
+        }).fail(function() {
+            console.log("ERROR!");
+        });
+
+        var payload = {
+            statistic: {player: playerId, game: gameId, total: statsTotal, stat_type: "assist"},
+            "authenticity_token" : auth_token};
+
+        $.post("/statistics", payload, function (data, status) {
+            console.log("DONE!");
+        }).fail(function() {
+            console.log("ERROR!");
+        });
+    }
+});
 
 var add_player = function(team_id, user_id, auth_token){
     var payload = {"id": team_id, "user_id" : user_id, "authenticity_token" : auth_token};

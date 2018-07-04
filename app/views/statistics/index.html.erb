@@ -2,8 +2,8 @@
 
 <h1>Statistics</h1>
 
-<table>
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
       <th>User</th>
       <th>Game</th>
@@ -16,9 +16,9 @@
   <tbody>
     <% @statistics.each do |statistic| %>
       <tr>
-        <td><%= statistic.user %></td>
-        <td><%= statistic.game %></td>
-        <td><%= statistic.type %></td>
+        <td><%= statistic.user.name %></td>
+        <td><%= statistic.game.scheduled_date %></td>
+        <td><%= statistic.stat_type %></td>
         <td><%= statistic.total %></td>
         <td><%= link_to 'Show', statistic %></td>
         <td><%= link_to 'Edit', edit_statistic_path(statistic) %></td>

@@ -16,6 +16,9 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    if params[:player_id]
+      @player = User.find(params[:player_id])
+    end
   end
 
   # GET /games/new
@@ -75,6 +78,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:scheduled_date, :where, :team_a_id, :team_b_id, :format_id)
+      params.require(:game).permit(:scheduled_date, :where, :team_a_id, :team_b_id, :game_format_id)
     end
 end

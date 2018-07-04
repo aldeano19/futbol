@@ -1,33 +1,21 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>When:</strong>
-  <%= @game.scheduled_date.strftime("%A, %d %b %Y %l:%M %p") %>
-</p>
+<table class="table table-bordered table-sm text-center table-hoover">
+  <thead class="thead-dark" >
+    <%= render "games/game_table_header_row" %>
+  </thead>
 
-<div>
-  <strong>Where:</strong>
-  <%= @game.where %>
+  <tbody>
+    <%= render "games/game_table_body_row" %>
+  </tbody>
+</table>
+
+<%= render "players/stats_overview_table" %>
+
+<div class="row">
+  <%= render "games/players_overview_table", locals: {team: @game.team_a}%>
+
+  <div class="col-4"></div>
+
+  <%= render "games/players_overview_table", locals: {team: @game.team_b} %>
+
 </div>
-
-<!--<div id="map">-->
-<!--  <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q=driftwood%20park&key=AIzaSyA5IXmr9Jo_NcJx3y60JV-QE0_kfHzqTeM" allowfullscreen></iframe>-->
-<!--</div>-->
-
-<p>
-  <strong>Teama:</strong>
-  <%= @game.team_a.name %>
-</p>
-
-<p>
-  <strong>Teamb:</strong>
-  <%= @game.team_b.name %>
-</p>
-
-<p>
-  <strong>Format:</strong>
-  <%= @game.game_format.name %>
-</p>
-
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>

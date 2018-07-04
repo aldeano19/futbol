@@ -24,10 +24,12 @@ class StatisticsController < ApplicationController
   # POST /statistics
   # POST /statistics.json
   def create
-    @statistic = Statistic.new(statistic_params)
+    user = User.find(params[:user_id])
+    @statistic = user.statistics.build(game_id: params[:game_id], stat_type: params[:stat_type], total: params[:total])
 
     respond_to do |format|
       if @statistic.save
+
         format.html { redirect_to @statistic, notice: 'Statistic was successfully created.' }
         format.json { render :show, status: :created, location: @statistic }
       else
@@ -69,6 +71,6 @@ class StatisticsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def statistic_params
-      params.require(:statistic).permit(:user, :game, :type, :total)
+      params.require(:statistic).permit(:user, :game, :stat_type, :total)
     end
 end

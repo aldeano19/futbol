@@ -12,4 +12,19 @@ class User < ApplicationRecord
   def owns?(team)
     return !Team.find_by(created_by_id: id, id: team.id).nil?
   end
+
+  def get_stat_total(type, game_id=nil)
+    if game_id
+      stats = statistics.where(stat_type: type, game_id: game_id).to_a
+    else
+      stats = statistics.where(stat_type: type).to_a
+    end
+
+    total = 0
+    stats.each do |stat|
+      total += stat.total
+    end
+
+    total
+  end
 end

@@ -1,0 +1,32 @@
+<table class="table table-bordered table-sm text-center table-hoover">
+  <thead class="thead-dark" >
+    <tr>
+      <th style="width: 40%;">Player</th>
+      <th style="width: 30%;">Goals</th>
+      <th style="width: 30%;">Assists</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @player %>
+      <tr id="stats-row" auth-token="<%= form_authenticity_token %>" player-id="<%= @player.id %>" game-id="<%= @game.id %>">
+        <td><%= @player.name %></td>
+
+        <td>
+          <input id="goals-editable" class="text-center" size="2"
+                 value="<%= @player.get_stat_total("goal") %>"/>
+        </td>
+
+        <td>
+          <input id="assists-editable" class="text-center" size="2"
+                 value="<%= @player.get_stat_total("assist") %>"/>
+        </td>
+
+      </tr>
+    <% else %>
+      <td> -- </td>
+      <td> -- </td>
+      <td> -- </td>
+    <% end %>
+  </tbody>
+</table>

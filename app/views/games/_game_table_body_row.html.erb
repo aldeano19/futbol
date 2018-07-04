@@ -1,0 +1,7 @@
+<tr onclick="window.location = '/games/<%= @game.id %>'">
+  <td><%= @game.scheduled_date.strftime("%A, %d %b %Y %l:%M %p") %></td>
+  <td><%= @game.where %></td>
+  <td><%= @game.team_a.name %></td>
+  <td><%= @game.team_b.name %></td>
+  <td><%= @game.game_format.name %></td>
+</tr>

@@ -1,0 +1,19 @@
+<div class="col-4">
+  <h2 class="text-center">Home</h2>
+  <table class="table table-bordered table-sm text-center table-hover">
+
+    <thead class="thead-dark">
+    <tr>
+      <th><%= locals[:team].name %></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% locals[:team].players.each do |player| %>
+      <tr class="team-player-row" onclick="window.location = '/games/<%= @game.id %>?player_id=<%= player.id %>'">
+        <td><%= player.name %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
