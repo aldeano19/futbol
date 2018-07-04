@@ -39,28 +39,30 @@ $(document).mouseup(function(e) {
     // if the target of the click isn't the container nor a descendant of the container
     if (!container.is(e.target) && container.has(e.target).length === 0) {
 
-        playerId = container.attr("player-id");
-        gameId = container.attr("game-id");
-        auth_token = container.attr("auth-token");
+        // TODO: Only post wwhen value change. Update backend to not change pages.
 
-        var payload = {user_id: playerId, game_id: gameId, total: goalsTotal, stat_type: "goal",
-            "authenticity_token" : auth_token};
-
-        $.post("/statistics", payload, function (data, status) {
-            console.log("DONE!");
-        }).fail(function() {
-            console.log("ERROR!");
-        });
-
-        var payload = {
-            statistic: {player: playerId, game: gameId, total: statsTotal, stat_type: "assist"},
-            "authenticity_token" : auth_token};
-
-        $.post("/statistics", payload, function (data, status) {
-            console.log("DONE!");
-        }).fail(function() {
-            console.log("ERROR!");
-        });
+        // playerId = container.attr("player-id");
+        // gameId = container.attr("game-id");
+        // auth_token = container.attr("auth-token");
+        //
+        // var payload = {user_id: playerId, game_id: gameId, total: goalsTotal, stat_type: "goal",
+        //     "authenticity_token" : auth_token};
+        //
+        // $.post("/statistics", payload, function (data, status) {
+        //     console.log("DONE!");
+        // }).fail(function() {
+        //     console.log("ERROR!");
+        // });
+        //
+        // var payload = {
+        //     statistic: {player: playerId, game: gameId, total: statsTotal, stat_type: "assist"},
+        //     "authenticity_token" : auth_token};
+        //
+        // $.post("/statistics", payload, function (data, status) {
+        //     console.log("DONE!");
+        // }).fail(function() {
+        //     console.log("ERROR!");
+        // });
     }
 });
 
