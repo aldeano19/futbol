@@ -1,42 +1,85 @@
-<%= form_with(model: game, local: true) do |form| %>
-  <% if game.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+<%= form_for @game_team_player, url: games_path, method: :post do |f| %>
 
-      <ul>
-      <% game.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div class="container border">
+
+    <div class="row text-center">
+      <span class="col-3"></span>
+      <div class="col-6">
+        <%= label_tag "Date: " %>
+        <%= select_datetime  %>
+      </div>
+      <span class="col-3"></span>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :scheduled_date %>
-    <%= form.datetime_select :scheduled_date %>
+    <div class="row text-center">
+      <span class="col-3"></span>
+      <div class="col-6">
+        <%= f.label :game_format %>
+        <%= f.collection_select(:game_format, GameFormat.all, :id, :name) %>
+      </div>
+      <span class="col-3"></span>
+    </div>
+
+
+
+    <div class="row">
+      <span class="col-1"></span>
+      <h4 class="col-2 text-center">Team A</h4>
+      <span class="col-6"></span>
+      <h4 class="col-2 text-center">Team B</h4>
+    </div>
+
+    <div class="row">
+      <span class="col-1"></span>
+
+      <%= f.text_field "team_a_name", placeholder: "Team Name", class: "col-2 text-center", value: "A"%>
+
+      <span class="col-6"></span>
+
+      <%= f.text_field "team_b_name", placeholder: "Team Name", class: "col-2 text-center", value: "B"%>
+    </div>
+
+    <div class="row" style="margin-top: 2vh;">
+      <h6 class="col-2 text-center"> Player Name </h6>
+      <h6 class="col-2 text-center"> Phone Number </h6>
+
+      <span class="col-4"></span>
+
+      <h6 class="col-2 text-center"> Player Name </h6>
+      <h6 class="col-2 text-center"> Phone Number </h6>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-4">
+        <% (0...2).each do |index| %>
+          <div class="row">
+            <%= f.text_field :team_a_name_list, multiple: true, placeholder: "Name", class: "col text-center", value: "name#{(index+1) * 231}" %>
+            <%= f.text_field :team_a_phone_list, multiple: true, placeholder: "Phone", class: "col text-center", value: "#{Random.rand(100000000000)}" %>
+          </div>
+        <% end %>
+      </div>
+
+      <span class="col-4"></span>
+
+      <div class="col-4">
+        <% (0...2).each do |index| %>
+          <div class="row">
+            <%= f.text_field :team_b_name_list, multiple: true, placeholder: "Name", class: "col text-center", value: "name#{(index+1) * 355}" %>
+            <%= f.text_field :team_b_phone_list, multiple: true, placeholder: "Phone", class: "col text-center", value: "#{Random.rand(100000000000)}" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row text-center">
+
+      <div class="col">
+
+        <%= submit_tag %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :where %>
-    <%= form.text_field :where %>
-  </div>
-
-  <div class="field">
-    <%= form.label "game[team_a_id]", "Team A" %>
-    <%= form.collection_select(:game, Team.all, :id, :name, {selected: Team.first.id, prompt: true}, name: "game[team_a_id]") %>
-  </div>
-
-  <div class="field">
-    <%= form.label "game[team_b_id]", "Team B"%>
-    <%= form.collection_select(:game, Team.all, :id, :name, {selected: Team.last.id, prompt: true}, name: "game[team_b_id]") %>
-  </div>
-
-  <div class="field">
-    <%= form.label "Format" %>
-    <%= form.collection_select(:game_format, GameFormat.all, :id, :name, {selected: GameFormat.first.id, prompt: true}, name: "game[game_format_id]") %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

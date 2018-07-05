@@ -16,14 +16,16 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
-    if params[:player_id]
-      @player = User.find(params[:player_id])
-    end
+    @team_a = @game.team_a
+    @team_b = @game.team_b
+
+    @team_a_players = @team_a.players
+    @team_b_players = @team_b.players
   end
 
   # GET /games/new
   def new
-    @game = Game.new
+    @game_team_player = GameTeamPlayer.new
   end
 
   # GET /games/1/edit
@@ -33,17 +35,19 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
 
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render :show, status: :created, location: @game }
-      else
-        format.html { render :new }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
-    end
+    # Here the params[:] will contain all info needed to create the players, teams, and the game. Build each one individually, then the game
+
+
+    @game_team_player = GameTeamPlayer.new(game_team_player_params)
+    raw_date = params[:date]
+    @game_team_player.scheduled_date = DateTime.new(raw_date[:year].to_i, raw_date[:month].to_i, raw_date[:day].to_i, raw_date[:hour].to_i, raw_date[:minute].to_i)
+
+    @game = @game_team_player.save!
+
+    flash[:success] = "Game #{@game.id} was successfully added." if @game
+
+    redirect_to game_path(@game)
   end
 
   # PATCH/PUT /games/1
@@ -79,5 +83,12 @@ class GamesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
       params.require(:game).permit(:scheduled_date, :where, :team_a_id, :team_b_id, :game_format_id)
+    end
+
+    def game_team_player_params
+
+      allowed_attr = [:where, :game_format, :game_master, :team_a_name, :team_b_name, team_a_name_list: [], team_a_phone_list: [], team_b_name_list: [], team_b_phone_list: []]
+
+      params.require(:game_team_player).permit(allowed_attr)
     end
 end

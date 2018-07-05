@@ -13,41 +13,41 @@
 
     <nav class="navbar">
 
-      <ul class="list-inline ">
-        <li class="list-inline-item">
-          <%= link_to "Home", root_path, class: "nav-link border rounded btn-primary" %>
-        </li>
+<!--      <ul class="list-inline ">-->
+<!--        <li class="list-inline-item">-->
+          <%#= link_to "Home", root_path, class: "nav-link border rounded btn-primary" %>
+<!--        </li>-->
 
-        <% if user_signed_in? %>
-          <li class="list-inline-item">
-            <%= link_to "Log Out", destroy_user_session_path, class: "nav-link border rounded btn-danger", method: :delete %>
-          </li>
+        <%# if user_signed_in? %>
+<!--          <li class="list-inline-item">-->
+            <%#= link_to "Log Out", destroy_user_session_path, class: "nav-link border rounded btn-danger", method: :delete %>
+<!--          </li>-->
 
-          <li class="list-inline-item">
-            <%= link_to "Games", games_path, class: "nav-link border rounded btn-secondary"%>
-          </li>
+<!--          <li class="list-inline-item">-->
+            <%#= link_to "Games", games_path, class: "nav-link border rounded btn-secondary"%>
+<!--          </li>-->
 
-          <li class="list-inline-item">
-            <%= link_to "Teams", teams_path, class: "nav-link border rounded btn-secondary" %>
-          </li>
+<!--          <li class="list-inline-item">-->
+            <%#= link_to "Teams", teams_path, class: "nav-link border rounded btn-secondary" %>
+<!--          </li>-->
 
-        <% else %>
-          <li class="list-inline-item">
-            <%= link_to "Sign In", new_user_session_path, class: "nav-link border rounded btn-success" %>
-          </li>
-        <% end %>
-      </ul>
+        <%# else %>
+<!--          <li class="list-inline-item">-->
+            <%#= link_to "Sign In", new_user_session_path, class: "nav-link border rounded btn-success" %>
+<!--          </li>-->
+        <%# end %>
+<!--      </ul>-->
 
 
-      <% if user_signed_in? %>
-        <div class="row">
-          User Info: &nbsp;
-          <p class="col" style="padding: 0px;"><strong><%= current_user.name %></strong></p> ,&nbsp;&nbsp;
+      <%# if user_signed_in? %>
+<!--        <div class="row">-->
+<!--          User Info: &nbsp;-->
+<!--          <p class="col" style="padding: 0px;"><strong><%#= current_user.name %></strong></p> ,&nbsp;&nbsp;-->
 
-          <p class="col" style="padding: 0px; "><strong><%= current_user.email %></strong></p>&nbsp;
+<!--          <p class="col" style="padding: 0px; "><strong><%#= current_user.email %></strong></p>&nbsp;-->
 
-        </div>
-      <% end %>
+<!--        </div>-->
+      <%# end %>
 
 
 

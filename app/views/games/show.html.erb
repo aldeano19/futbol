@@ -1,21 +1,58 @@
-
-<table class="table table-bordered table-sm text-center table-hoover">
-  <thead class="thead-dark" >
-    <%= render "games/game_table_header_row" %>
-  </thead>
-
-  <tbody>
-    <%= render "games/game_table_body_row" %>
-  </tbody>
-</table>
-
-<%= render "players/stats_overview_table" %>
-
+<h3 class="text-center">Game Id : <%= @game.id %></h3>
 <div class="row">
-  <%= render "games/players_overview_table", locals: {team: @game.team_a}%>
+  <span class="col-2"></span>
+  <div class="col">
+    <div class="text-center">
+      <div class="row">
+        <div class="col">
+          <h3>Date:</h3>
+          <p><%= dateFormatTwo @game.scheduled_date %></p>
+        </div>
 
-  <div class="col-4"></div>
+        <div class="col">
+          <h3>Game Master:</h3>
+          <p><%= @game.game_master.name %>:<%= @game.game_master.phone %></p>
+        </div>
+      </div>
+    </div>
 
-  <%= render "games/players_overview_table", locals: {team: @game.team_b} %>
+    <div class="row">
+      <p class="col-4 text-center"> <%= @team_a.name %></p>
+      <span class="col-4"></span>
+      <p class="col-4 text-center"> <%= @team_b.name %></p>
+    </div>
 
+    <div class="row" style="margin-top: 2vh;">
+      <h6 class="col-2 text-center"> Name </h6>
+      <h6 class="col-2 text-center"> Phone  </h6>
+
+      <span class="col-4"></span>
+
+      <h6 class="col-2 text-center"> Name </h6>
+      <h6 class="col-2 text-center"> Phone </h6>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <% @team_a_players.each do |player| %>
+          <div class="row">
+            <p class="col text-center"><%= player.name %></p>
+            <p class="col text-center"><%= player.phone %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <span class="col-4"></span>
+
+      <div class="col-4">
+        <% @team_b_players.each do |player| %>
+          <div class="row">
+            <p class="col text-center"><%= player.name %></p>
+            <p class="col text-center"><%= player.phone %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <span class="col-2"></span>
 </div>

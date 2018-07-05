@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3018_12_27_192313) do
+ActiveRecord::Schema.define(version: 3018_12_27_192318) do
 
   create_table "game_formats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -30,9 +30,13 @@ ActiveRecord::Schema.define(version: 3018_12_27_192313) do
     t.bigint "game_format_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "game_master_id"
     t.index ["game_format_id"], name: "index_games_on_game_format_id"
+    t.index ["game_master_id"], name: "index_games_on_game_master_id"
     t.index ["team_a_id"], name: "index_games_on_team_a_id"
     t.index ["team_b_id"], name: "index_games_on_team_b_id"
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "player_team_rs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -59,14 +63,11 @@ ActiveRecord::Schema.define(version: 3018_12_27_192313) do
 
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.bigint "created_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by_id"], name: "index_teams_on_created_by_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -80,16 +81,17 @@ ActiveRecord::Schema.define(version: 3018_12_27_192313) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "phone"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.string "email"
+    t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "games", "game_formats"
   add_foreign_key "games", "teams", column: "team_a_id"
   add_foreign_key "games", "teams", column: "team_b_id"
+  add_foreign_key "games", "users", column: "game_master_id"
   add_foreign_key "player_team_rs", "teams"
   add_foreign_key "player_team_rs", "users"
   add_foreign_key "statistics", "games"
   add_foreign_key "statistics", "users"
-  add_foreign_key "teams", "users", column: "created_by_id"
 end
